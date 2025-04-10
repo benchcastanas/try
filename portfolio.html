@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio | Bench</title>
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      background: url('images/coverabout.jpg') no-repeat center center/cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .navbar ul li a:hover,
+    .navbar ul li a:focus {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                   0 0 20px rgba(255, 255, 255, 0.6);
+      filter: brightness(1.3);
+      outline: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 60px 20px;
+      padding-top: 140px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      transition: text-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    h1:hover {
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+                   0 0 30px rgba(255, 255, 255, 0.6);
+      filter: brightness(1.2);
+    }
+
+    h2 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .project {
+      border: 2px solid white;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      transition: transform 0.3s ease;
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project:hover {
+      transform: scale(1.02);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .image-slides {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .img-slide {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .img-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    #imgslide3 img {
+      filter: brightness(1.2) contrast(1.1);
+      position: relative;
+      z-index: 0;
+    }
+
+    #imgslide3::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+      border-radius: 10px;
+    }
+
+    .img-nav {
+      display: none;
+    }
+
+    #img1:checked ~ .image-slides #imgslide1,
+    #img2:checked ~ .image-slides #imgslide2,
+    #img3:checked ~ .image-slides #imgslide3 {
+      display: block;
+    }
+
+    #img4:checked ~ .image-slides #imgslide4,
+    #img5:checked ~ .image-slides #imgslide5,
+    #img6:checked ~ .image-slides #imgslide6 {
+      display: block;
+    }
+
+    .img-left,
+    .img-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+      transition: 0.3s;
+    }
+
+    .img-left:hover,
+    .img-right:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .img-left { left: 10px; }
+    .img-right { right: 10px; }
+
+    .slideshow {
+      position: relative;
+      max-width: 960px;
+      margin: 80px auto;
+      z-index: 2;
+    }
+
+    .slides {
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    #s1:checked ~ .slides #slide1,
+    #s2:checked ~ .slides #slide2,
+    #s3:checked ~ .slides #slide3 {
+      display: block;
+    }
+
+    .slide video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .slide-caption {
+      text-align: center;
+      padding: 20px;
+      font-size: 1.4rem;
+      font-weight: 300;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+      opacity: 0.6;
+      transition: 0.3s;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    .nav-arrow:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .nav-left { left: 20px; }
+    .nav-right { right: 20px; }
+
+    .slide-nav {
+      display: none;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(255, 255, 255, 0.07);
+      color: white;
+      font-size: 1.8rem;
+      padding: 12px 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      text-decoration: none;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+      transition: all 0.4s ease-in-out;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+      animation: fadeInScale 1s ease-in-out both;
+    }
+
+    .back-to-top:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: auto;
+      z-index: 2;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="portfolio.html">PORTFOLIO</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <div class="fade-in">
+    <div class="container">
+      <h1>PORTFOLIO</h1>
+      <h2>Work Samples</h2>
+
+      <div class="projects">
+        <!-- First Slideshow -->
+        <div class="project">
+          <input type="radio" name="imgslide" id="img1" class="img-nav" checked>
+          <input type="radio" name="imgslide" id="img2" class="img-nav">
+          <input type="radio" name="imgslide" id="img3" class="img-nav">
+
+          <div class="image-slides">
+            <div class="img-slide" id="imgslide1">
+              <img src="images/1st.jpg">
+              <label for="img2" class="img-right">►</label>
+            </div>
+            <div class="img-slide" id="imgslide2">
+              <img src="images/2nd.jpg">
+              <label for="img1" class="img-left">◄</label>
+              <label for="img3" class="img-right">►</label>
+            </div>
+            <div class="img-slide" id="imgslide3">
+              <img src="images/tres.png">
+              <label for="img2" class="img-left">◄</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Slideshow -->
+        <div class="project">
+          <input type="radio" name="imgslide2" id="img4" class="img-nav" checked>
+          <input type="radio" name="imgslide2" id="img5" class="img-nav">
+          <input type="radio" name="imgslide2" id="img6" class="img-nav">
+
+          <div class="image-slides">
+            <div class="img-slide" id="imgslide4">
+              <img src="images/c.png" alt="Sample 1">
+              <label for="img5" class="img-right">►</label>
+            </div>
+            <div class="img-slide" id="imgslide5">
+              <img src="images/b.png" alt="Sample 2">
+              <label for="img4" class="img-left">◄</label>
+              <label for="img6" class="img-right">►</label>
+            </div>
+            <div class="img-slide" id="imgslide6">
+              <img src="images/a.png" alt="Sample 3">
+              <label for="img5" class="img-left">◄</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Slideshow -->
+      <div class="slideshow">
+        <input type="radio" name="slider" id="s1" class="slide-nav" checked>
+        <input type="radio" name="slider" id="s2" class="slide-nav">
+        <input type="radio" name="slider" id="s3" class="slide-nav">
+
+        <div class="slides">
+          <div class="slide" id="slide1">
+            <video src="video/film.mov" controls></video>
+            <div class="slide-caption">The latest short film I edited.</div>
+            <label for="s2" class="nav-arrow nav-right">►</label>
+          </div>
+
+          <div class="slide" id="slide2">
+            <video src="video/intro.mov" controls></video>
+            <div class="slide-caption">A cutted introduction I edited.</div>
+            <label for="s1" class="nav-arrow nav-left">◄</label>
+            <label for="s3" class="nav-arrow nav-right">►</label>
+          </div>
+
+          <div class="slide" id="slide3">
+            <video src="video/debu.mov" controls></video>
+            <div class="slide-caption">A cutted documentary of Debutant</div>
+            <label for="s2" class="nav-arrow nav-left">◄</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#top" class="back-to-top" title="Back to Top">↑</a>
+
+    <footer>
+      &copy; 2025 Bench Castañas. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>

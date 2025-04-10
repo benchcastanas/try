@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Bench</title>
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      background: url('images/coverabout.jpg') no-repeat center center/110%;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .navbar {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  /* animation removed */
+}
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .navbar ul li a:hover,
+    .navbar ul li a:focus {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                   0 0 20px rgba(255, 255, 255, 0.6);
+      filter: brightness(1.3);
+      outline: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 60px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    h1:hover {
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+                   0 0 30px rgba(255, 255, 255, 0.6);
+      transition: text-shadow 0.3s ease, filter 0.3s ease;
+      filter: brightness(1.2);
+    }
+
+    .contact-info {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 2.2;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .contact-info a {
+      color: white;
+      text-decoration: none;
+      transition: text-shadow 0.3s, transform 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .contact-info a:hover,
+    .contact-info a:focus {
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .contact-info i {
+      font-size: 1.4rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: left;
+    }
+
+    input, textarea {
+      padding: 10px 15px;
+      font-family: inherit;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      backdrop-filter: blur(6px);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #ccc;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid #fff;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: auto;
+      z-index: 2;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="portfolio.html">PORTFOLIO</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>CONTACT</h1>
+
+    <div class="contact-info" aria-label="Contact details">
+      <a href="mailto:bdcastanas2589qc@student.fatima.edu.ph">
+        <i class="fas fa-envelope"></i> bdcastanas2589qc@student.fatima.edu.ph
+      </a>
+      <a href="https://www.facebook.com/benchbenchbenchbenchbench" target="_blank">
+        <i class="fab fa-facebook"></i> Bench Castañas
+      </a>
+      <a href="https://www.instagram.com/bnchjeno/" target="_blank">
+        <i class="fab fa-instagram"></i> @bnchjeno
+      </a>
+      <a href="tel:+639701499079">
+        <i class="fas fa-phone"></i> +63 970 149 9079
+      </a>
+    </div>
+
+    <form aria-label="Contact form">
+      <input type="text" placeholder="Your Name" aria-label="Your Name" required />
+      <input type="email" placeholder="Your Email" aria-label="Your Email" required />
+      <textarea rows="5" placeholder="Your Message" aria-label="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Bench Castañas. All rights reserved.
+  </footer>
+</body>
+</html>
